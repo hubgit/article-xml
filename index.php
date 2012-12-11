@@ -76,6 +76,21 @@ function fetch_doi($id) {
 
 function fetch_pmc($id) {
 	$params = array(
+		'db' => 'pmc',
+		'id' => $id,
+	);
+
+	$url = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?' . http_build_query($params);
+
+	$data = file_get_contents($url);
+	$data = preg_replace('/^.+?<pmc-articleset>/s', '<article ', $data);
+	$data = preg_replace('/<\/pmc-articleset>.*/s', '</article>', $data);
+
+	print $data;
+}
+
+function fetch_pmc_oai($id) {
+	$params = array(
 		'verb' => 'GetRecord',
 		'metadataPrefix' => 'pmc',
 		'identifier' => 'oai:pubmedcentral.nih.gov:' . $id,
