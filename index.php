@@ -83,8 +83,8 @@ function fetch_pmc($id) {
 	$url = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?' . http_build_query($params);
 
 	$data = file_get_contents($url);
-	$data = preg_replace('/^.+?<pmc-articleset>/s', '<article ', $data);
-	$data = preg_replace('/<\/pmc-articleset>.*/s', '</article>', $data);
+	$data = preg_replace('/^.+?<pmc-articleset>/s', '', $data);
+	$data = preg_replace('/<\/pmc-articleset>.*/s', '', $data);
 
 	print $data;
 }
