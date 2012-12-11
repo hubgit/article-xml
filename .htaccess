@@ -1,0 +1,5 @@
+DirectoryIndex index.php
+
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !/static/
+RewriteRule ^(.*)$ index.php?_path=$1 [L,QSA]
